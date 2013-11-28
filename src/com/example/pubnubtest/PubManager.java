@@ -7,6 +7,7 @@ import java.util.Hashtable;
 import com.pubnub.api.Callback;
 import com.pubnub.api.Pubnub;
 import com.pubnub.api.PubnubError;
+import android.util.Log;
 
 // This class performs the controller tasks. The purpose is to initialize PubNub
 // and perform the subscribe and publish duties.
@@ -38,7 +39,7 @@ public class PubManager {
 			pubnub.subscribe(args, new Callback() {
 				@Override
 				public void connectCallback(String channel, Object message) {
-					System.out.println(" Subscribed .....");
+					Log.w("Sucess", " Subscribed .....");
 				}
 				@Override
 				public void disconnectCallback(String channel, Object message) {
@@ -64,7 +65,7 @@ public class PubManager {
 			});
 
 		} catch (Exception e) {
-			System.out.println("Error in subscribe:" + e.getMessage());
+			Log.w("PubManager","Error in subscribe:" + e.getMessage());
 		}
 	}
 
@@ -82,7 +83,7 @@ public class PubManager {
 				}
 				@Override
 				public void errorCallback(String channel, PubnubError error) {
-					System.out.print("Error:" + error.getErrorString());
+					Log.w("PubManager","Error:" + error.getErrorString());
 					
 					// If any of the measurements fail, just reset the whole
 					// benchmark for now.
@@ -90,7 +91,7 @@ public class PubManager {
 				}
 			});
 		} catch (Exception e) {
-			System.out.println("Error in publish");
+			Log.w("PubManager", "Error in publish");
 			e.printStackTrace();
 		}
 
